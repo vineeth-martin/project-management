@@ -24,5 +24,15 @@ public class ItemController {
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
+    @DeleteMapping("/{itemId}")
+    public void deleteItem(@PathVariable("itemId") Integer itemId) {
+        itemService.deleteById(itemId); // Call the service method to delete by ID
+    }
+
+    // Update an existing item
+    @PutMapping("/{itemId}")
+    public Item updateItem(@PathVariable("itemId") Integer itemId, @RequestBody Item updatedItem) {
+        return itemService.updateItem(itemId, updatedItem);
+    }
 }
 

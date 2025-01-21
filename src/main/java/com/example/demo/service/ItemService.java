@@ -24,4 +24,24 @@ public class ItemService {
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
+    public void deleteById(Integer itemId) {
+        itemRepository.deleteById(itemId); // Calls the repository method to delete an item by ID
+    }
+    // Update an existing item
+    public Item updateItem(Integer itemId, Item updatedItem) {
+        Item existingItem = itemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Item not found with id: " + itemId));
+
+        // Update fields
+        existingItem.setDescription(updatedItem.getDescription());
+        existingItem.setPartNo(updatedItem.getPartNo());
+        existingItem.setUnitPrice(updatedItem.getUnitPrice());
+        existingItem.setMake(updatedItem.getMake());
+        existingItem.setUom(updatedItem.getUom()); // Include UOM in the update logic
+
+
+        // Save the updated item
+        return itemRepository.save(existingItem);
+    }
+
 }

@@ -14,6 +14,10 @@ public class Item {
     @Column(unique = true, nullable = false)
     private String description;
 
+    // New UOM field
+    @Column(nullable = false, length = 10)
+    private String uom;
+    
     public Integer getItemId() {
 		return itemId;
 	}
@@ -62,5 +66,12 @@ public class Item {
 		this.make = make;
 	}
 
+    public String getUom() {
+        return uom;
+    }
+
+    public void setUom(String uom) {
+        this.uom = uom;
+    }
     // Getters and Setters
 }

@@ -26,4 +26,17 @@ public class VendorService {
     public void deleteById(Integer id) {
         vendorRepository.deleteById(id);
     }
+    // Update an existing vendor
+    public Vendor updateVendor(Integer vendorId, Vendor updatedVendor) {
+        Vendor existingVendor = vendorRepository.findById(vendorId)
+                .orElseThrow(() -> new RuntimeException("Vendor not found with id: " + vendorId));
+
+        // Update fields
+        existingVendor.setName(updatedVendor.getName());
+        existingVendor.setAddress(updatedVendor.getAddress());
+        existingVendor.setPostAddress(updatedVendor.getPostAddress());
+        existingVendor.setTrn(updatedVendor.getTrn());
+
+        return vendorRepository.save(existingVendor);
+    }
 }

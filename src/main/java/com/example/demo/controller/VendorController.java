@@ -23,14 +23,24 @@ public class VendorController {
 
         return vendorService.saveOrUpdate(vendor);
     }
+    @PutMapping("/{vendorId}")
+    public Vendor updateVendor(@PathVariable("vendorId") Integer vendorId, @RequestBody Vendor updatedVendor) {
+        return vendorService.updateVendor(vendorId, updatedVendor);
+    }
     @GetMapping
     public List<Vendor> getAllVendors() {
         return vendorService.findAll(); // Assume `findAll` is implemented in VendorService
     }
 
     // Add Delete Mapping
+//    @DeleteMapping("/{id}")
+//    public void deleteVendor(@PathVariable Integer id) {
+//        vendorService.deleteById(id); // Call the delete method from the service
+//    }
+    
     @DeleteMapping("/{id}")
-    public void deleteVendor(@PathVariable Integer id) {
-        vendorService.deleteById(id); // Call the delete method from the service
+    public void deleteVendor(@PathVariable("id") Integer id) {
+        vendorService.deleteById(id);
     }
+
 }
